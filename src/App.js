@@ -60,6 +60,7 @@ class App extends React.Component {
     let weatherData = await axios.get(`https://date-weather-city.herokuapp.com/weather?searchQuery=${this.state.city}`)
     this.setState({
       arrData:weatherData.data,
+      messageErrorWeather:""
     });
 
     // console.log(this.state.arrData);
