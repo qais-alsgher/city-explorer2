@@ -8,6 +8,7 @@ import Weather from './weather';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +57,7 @@ class App extends React.Component {
   displayWeather = async (lat, lon, city) => {
 
   try {
-    let weatherData = await axios.get(`http://localhost:3000/weather?searchQuery=${this.state.city}`)
+    let weatherData = await axios.get(`https://date-weather-city.herokuapp.com/weather?searchQuery=${this.state.city}`)
     this.setState({
       arrData:weatherData.data,
     });
@@ -72,8 +73,6 @@ class App extends React.Component {
   }
 
 }
-
-
 
   render() {
     return (
