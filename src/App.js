@@ -53,15 +53,15 @@ class App extends React.Component {
 
     }
 
-   this.displayWeather(urlLocation.data[0].lat ,urlLocation.data[0].lon);
+   this.displayWeather(urlLocation.data[0].lat ,urlLocation.data[0].lon,this.state.city);
    this.diplayMovies(this.state.city);
   }
 
 
-  displayWeather = async (lat, lon) => {
+  displayWeather = async (lat, lon,cityName) => {
 
   try {
-    let weatherData = await axios.get(`https://date-weather-city.herokuapp.com/weather?lat=${lat}&lon=${lon}`)
+    let weatherData = await axios.get(`https://date-weather-city.herokuapp.com/weather?lat=${lat}&lon=${lon}&searchQuery=${cityName}`)
     this.setState({
       arrData:weatherData.data,
       messageErrorWeather:""
