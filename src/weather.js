@@ -1,4 +1,5 @@
 import React from "react";
+import WeatherDay from "./WeatherDay";
 
 class Weather extends React.Component {
 
@@ -11,11 +12,10 @@ class Weather extends React.Component {
             <>
 
                 {
-                    this.props.w.map(ele => {
+                    this.props.w.map((ele,index) => {
                         return (
                             <>
-                            <h6>{ele.description}</h6>
-                             <h6>{ele.date}</h6>       
+                            <WeatherDay day={ele} index={index}/>     
                           </> ) ;
                     })
                 }

@@ -15,7 +15,7 @@ export default class Movies extends React.Component {
                             <p>{ele.overview}</p>
                             <p> Avg-votes: {ele.average_votes}</p>
                             <p>total_votes: {ele.total_votes}</p>
-                            <img src={`http://image.tmdb.org/t/p/w500${ele.image_url}`} alt="img move"/>
+                            <img src={`http://image.tmdb.org/t/p/w500${ele.image_url}`} alt={`img move ${ele.title}`}/>
                             <p>popularity: {ele.popularity} </p>
                             <p>release_date: {ele.release_date}</p>
                             </>
