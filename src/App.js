@@ -61,7 +61,7 @@ class App extends React.Component {
   displayWeather = async (lat, lon) => {
 
   try {
-    let weatherData = await axios.get(`http://localhost:3000/weather?lat=${lat}&lon=${lon}`)
+    let weatherData = await axios.get(`https://date-weather-city.herokuapp.com/weather?lat=${lat}&lon=${lon}`)
     this.setState({
       arrData:weatherData.data,
       messageErrorWeather:""
@@ -81,7 +81,7 @@ class App extends React.Component {
 diplayMovies=async(cityName)=>{
 
   try{
-let movCity=await axios.get(`http://localhost:3000/movies?searchQuery=${cityName}`);
+let movCity=await axios.get(`https://date-weather-city.herokuapp.com/movies?searchQuery=${cityName}`);
 // console.log(movCity);
 this.setState({
 arrMove:movCity.data,
