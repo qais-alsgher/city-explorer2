@@ -8,7 +8,7 @@ import Weather from './weather';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-
+import Movies from './Movies';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,10 @@ class App extends React.Component {
       imgUrl: '',
       messageError: '',
       arrData:[{discription:"", date:""}],
-      messageErrorWeather:''
+      messageErrorWeather:'',
+      arrMove:[{title:"",overview:"",average_votes:"",
+      total_votes:"",image_url:"",popularity:"",release_date:""}],
+      errorMov:''
     }
   }
 
@@ -50,20 +53,20 @@ class App extends React.Component {
 
     }
 
-   this.displayWeather(urlLocation.data[0].lat ,urlLocation.data[0].lon, this.state.city);
+   this.displayWeather(urlLocation.data[0].lat ,urlLocation.data[0].lon);
+   this.diplayMovies(this.state.city);
   }
 
 
-  displayWeather = async (lat, lon, city) => {
+  displayWeather = async (lat, lon) => {
 
   try {
-    let weatherData = await axios.get(`https://date-weather-city.herokuapp.com/weather?searchQuery=${this.state.city}`)
+    let weatherData = await axios.get(`http://localhost:3000/weather?lat=${lat}&lon=${lon}`)
     this.setState({
       arrData:weatherData.data,
       messageErrorWeather:""
     });
 
-    // console.log(this.state.arrData);
   } catch (error) {
 
     this.setState({
@@ -73,6 +76,25 @@ class App extends React.Component {
 
   }
 
+}
+
+diplayMovies=async(cityName)=>{
+
+  try{
+let movCity=await axios.get(`http://localhost:3000/movies?searchQuery=${cityName}`);
+// console.log(movCity);
+this.setState({
+arrMove:movCity.data,
+errorMov:''
+})
+  }catch(error){
+
+this.setState({
+  errorMov:"the city does not have a movies",
+  arrMove:[{title:"",overview:"",average_votes:"",
+      total_votes:"",image_url:"",popularity:"",release_date:""}]
+})
+  }
 }
 
   render() {
@@ -97,7 +119,7 @@ class App extends React.Component {
         />
         {/* <p>{this.state.arrData}</p> */}
         <Weather w={this.state.arrData} />
-
+        <Movies arrM={this.state.arrMove} />
         <Footer />
       </div>
     );
