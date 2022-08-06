@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './main';
 import Header from './header';
 import Footer from './footer';
-import Weather from './weather';
+import Weather from './component/weather';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-import Movies from './Movies';
+import Movies from './component/Movies';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,8 @@ class App extends React.Component {
       messageErrorWeather:'',
       arrMove:[{title:"",overview:"",average_votes:"",
       total_votes:"",image_url:"",popularity:"",release_date:""}],
-      errorMov:''
+      errorMov:'',
+      show:false
     }
   }
 
@@ -49,6 +50,7 @@ class App extends React.Component {
     } catch (error) {
       this.setState({
         messageError: 'the city dose not exist',
+        show:true
       });
 
     }
@@ -71,7 +73,8 @@ class App extends React.Component {
 
     this.setState({
       messageErrorWeather: "The city dose not exist data for weather",
-      arrData:[{discription:"", date:""}]
+      arrData:[{discription:"", date:""}],
+      show:true
     });
 
   }
@@ -92,7 +95,9 @@ errorMov:''
 this.setState({
   errorMov:"the city does not have a movies",
   arrMove:[{title:"",overview:"",average_votes:"",
-      total_votes:"",image_url:"",popularity:"",release_date:""}]
+      total_votes:"",image_url:"",popularity:"",release_date:""}],
+      show:true
+  
 })
   }
 }
@@ -114,10 +119,8 @@ this.setState({
           lon={this.state.lon}
           lat={this.state.lat}
           imgUrl={this.state.imgUrl}
-          messageError={this.state.messageError}
-          messageErrorWeather={this.state.messageErrorWeather}
+          
         />
-        {/* <p>{this.state.arrData}</p> */}
         <Weather w={this.state.arrData} />
         <Movies arrM={this.state.arrMove} />
         <Footer />
