@@ -1,5 +1,7 @@
 import React from "react";
 import WeatherDay from "./WeatherDay";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 class Weather extends React.Component {
 
@@ -10,15 +12,18 @@ class Weather extends React.Component {
         return (
 
             <>
-
+                    <Row xs={1} md={6} className="g-4">
                 {
                     this.props.w.map((ele,index) => {
                         return (
                             <>
-                            <WeatherDay day={ele} index={index}/>     
+                            <Col>
+                            <WeatherDay day={ele}/>  
+                            </Col>   
                           </> ) ;
                     })
                 }
+                </Row>
             </>
         )
     }
